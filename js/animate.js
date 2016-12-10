@@ -1,4 +1,5 @@
 /*
+  颜色动画 rgb()
   函数 colorAnimate (obj,attr,val,dur,fn,callback)
   obj   要处理的对象
   attr  要处理的属性  background   color
@@ -11,7 +12,7 @@
    obj   要动画的对象
    attrobj   要动画的属性对象{width:xxxx,height:xxx,left:xxxx,top:xxxx,opacity:xxx}
    dur   持续时间
-   fun   动画方式
+   fun   动画方式 Tween.Linear.easeIn
    callback 变化完成之后要处理的内容
 */
 
@@ -226,7 +227,6 @@
 			  callback=dur;
 			  dur=500;
 		}
-	  
 	  }
 	}
 	if(arguments.length==4){
@@ -235,28 +235,22 @@
 		 if(fun.length>=4){
 			  fun=fun;
 			  callback=null;
-			  
 		}else{
 	     	  callback=fun;
 			  fun=Tween.Linear;
-		   
 		}
-		 
 	   }else{	  
 				  callback=fun;
 				  fun=dur;
-				  dur=500
-				 
-			
+				  dur=500;
 	  }
 	}
     var time=0;
-	var start={};var change={};
+	  var start={};var change={};
     for (var i in attrObj) {
 	 start[i]=setCss(obj,i);
 	 change[i]=attrObj[i]-start[i];
     }
-
 	obj.t=setInterval(function(){
 	  if(time>=dur){
 	   clearInterval(obj.t);
@@ -274,10 +268,6 @@
 	  }
 	},60)
   }
-
-
-
-
  function setCss (obj,attr,val) {
    if(obj.nodeType!==1){
      return;
@@ -351,6 +341,7 @@
 		case 'borderLeftColor':
 		case 'borderRightColor':
 		case 'borderTopColor':
+    case "borderColor":
 		obj.style[attr]=val;
 	 break;
 	 default:
@@ -387,7 +378,7 @@ function getColor (color) {
   函数 colorAnimate (obj,attr,val,dur,fn,callback)
   obj   要处理的对象
   attr  要处理的属性  background   color
-  val   最终颜色 rbg    #
+  val   最终颜色 rbg  #
   fn    动画的方式
   callback  变化完成之后要处理的内容
 */
